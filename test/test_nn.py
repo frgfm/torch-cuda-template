@@ -1,15 +1,15 @@
 import unittest
 import torch
-import torch.nn as nn
-import cuda_ext
+from torch.nn import Module
+from cuda_ext import nn
 
 
-class Tester(unittest.TestCase):
+class NNTester(unittest.TestCase):
     def test_d_sigmoid(self):
 
-        mod = cuda_ext.DSigmoid()
+        mod = nn.DSigmoid()
         # Type verification
-        self.assertIsInstance(mod, nn.Module)
+        self.assertIsInstance(mod, Module)
 
         num_batches = 2
         num_classes = 4

@@ -1,11 +1,5 @@
-import torch
-
-# Our module!
 from ._C import d_sigmoid
+from cuda_ext import nn
+from .version import __version__
 
-__all__ = ['d_sigmoid', 'DSigmoid']
-
-
-class DSigmoid(torch.nn.Module):
-    def forward(self, x):
-        return d_sigmoid(x)
+__all__ = ['d_sigmoid']

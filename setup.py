@@ -37,6 +37,12 @@ requirements = [
     'torch>=1.2',
 ]
 
+ext_sources = [
+    'csrc/dsigmoid_cuda.cpp',
+    'csrc/dsigmoid_cpu.cpp',
+    'csrc/dsigmoid_kernel.cu',
+]
+
 
 setup(
     name=package_name,
@@ -73,18 +79,10 @@ setup(
     include_package_data=True,
     install_requires=requirements,
     ext_modules=[
-          CUDAExtension(f"{package_name}._C", [
-              'csrc/dsigmoid_cuda.cpp',
-              'csrc/dsigmoid_cpu.cpp',
-              'csrc/dsigmoid_kernel.cu',
-              ],
-              extra_compile_args={
-                'cxx': [],
-                'nvcc': ['--expt-extended-lambda']
-              },
-              include_dirs=['external']
-          )
-      ],
+        CUDAExtension(f"{package_name}._C", ext_sources,
+                      extra_compile_args={'cxx': [], 'nvcc': ['--expt-extended-lambda']},
+                      include_dirs=['external'])
+    ],
     # Disabling ninja for now
     # cf. https://github.com/microsoft/DeepSpeed/issues/280
     cmdclass={'build_ext': BuildExtension.with_options(use_ninja=False)},

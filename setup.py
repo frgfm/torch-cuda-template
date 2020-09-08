@@ -74,7 +74,8 @@ setup(
     install_requires=requirements,
     ext_modules=[
           CUDAExtension(f"{package_name}._C", [
-              'csrc/dsigmoid.cpp',
+              'csrc/dsigmoid_cuda.cpp',
+              'csrc/dsigmoid_cpu.cpp',
               'csrc/dsigmoid_kernel.cu',
               ],
               extra_compile_args={

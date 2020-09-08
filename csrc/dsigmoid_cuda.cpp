@@ -3,12 +3,7 @@ using namespace pybind11::literals;
 
 // Forward declaration of kernels
 void d_sigmoid_cuda(torch::Tensor &output, const torch::Tensor &input);
-
-// CPU function
-void d_sigmoid_cpu(torch::Tensor &output, const torch::Tensor &input) {
-  auto s = torch::sigmoid(input);
-  output = (1 - s) * s;
-}
+void d_sigmoid_cpu(torch::Tensor &output, const torch::Tensor &input);
 
 #define CHECK_CUDA(x) TORCH_CHECK(x.type().is_cuda(), #x " must be a CUDA tensor")
 #define CHECK_CONTIGUOUS(x) TORCH_CHECK(x.is_contiguous(), #x " must be contiguous")

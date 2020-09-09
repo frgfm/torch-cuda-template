@@ -44,9 +44,9 @@ This python package can be used like any other:
 
 ```python
 import torch
-import cuda_ext
+import cuda_ext.nn as nn
 
-my_module = cuda_ext.DSigmoid()
+my_module = nn.DSigmoid()
 
 with torch.no_grad():
 	out = my_module(torch.rand(2, 3, 32, 32).cuda())
